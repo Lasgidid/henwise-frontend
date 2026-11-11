@@ -1,0 +1,8 @@
+{% load l10n %}
+<div class="card mb-3 tone-{{ withdrawal.tone }}" style="border:0"><div class="card-body">
+  <div class="small fw-semibold"><i class="bi bi-shield-exclamation me-1"></i>Egg sales withdrawal timer</div>
+  <div class="fs-3 fw-bold">{{ withdrawal.big }}</div>
+  {% if withdrawal.progress %}<div class="meter my-2" style="background:rgba(255,255,255,.6)"><span class="m-warning" style="width:{{ withdrawal.progress|unlocalize }}%"></span></div>{% endif %}
+  <div class="small">{{ withdrawal.text }}</div>
+</div></div>
+<div class="card"><div class="card-body px-4 py-2">{% for r in rows %}{% include "partials/_vaccine_row.html" %}{% endfor %}</div></div>

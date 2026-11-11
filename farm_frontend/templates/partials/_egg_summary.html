@@ -1,0 +1,15 @@
+{% load l10n %}
+<div class="card egg-card"><div class="card-body p-4">
+  <div class="d-flex justify-content-between align-items-start">
+    <div><div class="text-muted small">Hen-day production</div><div class="big">{{ s.pct }}%</div></div>
+    <span class="pill tone-{{ s.tone }}">{{ s.label }}</span>
+  </div>
+  <div class="meter my-3"><span class="m-{{ s.tone }}" style="width:{{ s.fill|unlocalize }}%"></span></div>
+  <div class="small text-muted mb-3">{{ s.total }} eggs from {{ s.birds }} live birds · {{ s.delta_text }}</div>
+  <div class="d-flex flex-wrap gap-2 mb-3">
+    <span class="pill tone-success">Good {{ s.good }} · {{ s.good_pct }}%</span>
+    <span class="pill tone-warning">Cracked {{ s.cracked }} · {{ s.cracked_pct }}%</span>
+    <span class="pill tone-neutral">Dirty {{ s.dirty }} · {{ s.dirty_pct }}%</span>
+  </div>
+  <div class="fw-semibold"><i class="bi bi-box-seam me-1"></i>{{ s.crates }} crates + {{ s.loose }} loose eggs ready to sell</div>
+</div></div>

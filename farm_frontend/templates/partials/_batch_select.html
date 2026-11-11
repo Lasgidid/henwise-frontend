@@ -1,0 +1,4 @@
+<select name="batch" class="form-select form-select-lg fw-bold" aria-label="Batch"
+        hx-get="{{ panel_url }}" hx-target="#health-panel" hx-swap="innerHTML" hx-trigger="change">
+  {% for b in batches %}<option value="{{ b.code }}" {% if b.code == batch.code %}selected{% endif %}>{{ b.name }} · {{ b.age }}</option>{% endfor %}
+</select>

@@ -1,0 +1,18 @@
+{% extends "app_base.html" %}
+{% block title %}Layer batches · {{ brand }}{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+  <div><h1 class="page-title">Layer batches</h1><div class="text-muted">Chicks lay at about 16 weeks and retire at about 18 months.</div></div>
+  <button class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#newBatch"><i class="bi bi-plus-lg me-1"></i>New batch</button>
+</div>
+<form id="newBatch" class="card collapse mb-4" hx-post="{% url 'batch_create' %}" hx-target="#batch-list" hx-swap="innerHTML" hx-on::after-request="if(event.detail.successful){this.reset();bootstrap.Collapse.getOrCreateInstance(this).hide()}">
+  <div class="card-body p-4 row g-3">
+    <div class="col-md-3"><label class="form-label fw-semibold">Batch name</label><input name="name" class="form-control" placeholder="Batch D" required></div>
+    <div class="col-md-3"><label class="form-label fw-semibold">Breed</label><input name="breed" class="form-control" placeholder="Isa Brown"></div>
+    <div class="col-md-3"><label class="form-label fw-semibold">Hatch date</label><input type="date" name="hatch_date" class="form-control" required></div>
+    <div class="col-md-3"><label class="form-label fw-semibold">Number of birds</label><input type="number" min="1" name="quantity" class="form-control" required></div>
+    <div class="col-12"><button class="btn btn-primary">Add batch</button></div>
+  </div>
+</form>
+<div id="batch-list">{% include "partials/_batch_list.html" %}</div>
+{% endblock %}

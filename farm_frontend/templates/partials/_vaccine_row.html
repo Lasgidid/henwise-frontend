@@ -1,0 +1,9 @@
+<div class="row-item" id="vrow-{{ r.pk }}">
+  <span class="dot dot-{{ r.kind }}"></span>
+  <div class="flex-grow-1"><div class="fw-semibold">{{ r.name }}</div><div class="small {% if r.kind == 'overdue' %}text-danger fw-semibold{% else %}text-muted{% endif %}">{{ r.sub }}</div></div>
+  {% if r.kind == 'done' %}<span class="pill tone-success">Administered</span>
+  {% else %}
+    {% if r.kind == 'overdue' %}<span class="pill tone-danger">Overdue</span>{% else %}<span class="pill tone-warning">Pending</span>{% endif %}
+    <button class="btn btn-primary btn-sm" hx-post="{% url 'vaccine_given' r.pk %}" hx-target="#vrow-{{ r.pk }}" hx-swap="outerHTML">Mark given</button>
+  {% endif %}
+</div>

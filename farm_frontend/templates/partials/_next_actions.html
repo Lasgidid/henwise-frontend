@@ -1,0 +1,7 @@
+{% for a in actions %}
+<a class="action-row tone-{{ a.tone }}" href="{% url a.url_name %}">
+  <span class="ico"><i class="bi bi-{{ a.icon }}"></i></span>
+  <span class="flex-grow-1"><div class="t">{{ a.title }}</div><div class="d">{{ a.detail }}</div></span>
+  <span class="pill" style="background:rgba(255,255,255,.65)">{{ a.pill }}</span>
+</a>
+{% endfor %}

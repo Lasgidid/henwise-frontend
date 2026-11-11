@@ -1,0 +1,24 @@
+{% extends "app_base.html" %}
+{% block title %}Eggs · {{ brand }}{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+  <div><h1 class="page-title">Record eggs</h1><div class="text-muted">{{ today_label }}</div></div>
+  <a class="btn btn-outline-primary" href="{% url 'egg_history' %}"><i class="bi bi-graph-up me-1"></i>Production history</a>
+</div>
+{% if hold %}<div class="alert alert-warning"><i class="bi bi-clock-history me-1"></i>Vaccine withdrawal is active. Do not sell Batch A eggs until {{ hold.until }}. You can still record them.</div>{% endif %}
+<div class="row g-3">
+  <div class="col-12 col-lg-6">
+    <form id="egg-form" class="card" hx-post="{% url 'egg_preview' %}" hx-trigger="input delay:150ms" hx-target="#egg-summary" hx-swap="innerHTML">
+      <div class="card-body p-4">
+        <div class="mb-3"><label class="form-label fw-semibold">Batch</label>
+          <select name="batch" class="form-select">{% for b in laying_batches %}<option value="{{ b.code }}">{{ b.name }} · {{ b.sub }}</option>{% endfor %}</select></div>
+        {% include "partials/_stepper.html" with name="good" label="Good eggs" value=summary.good hint="Sellable, clean shell" %}
+        {% include "partials/_stepper.html" with name="cracked" label="Cracked" value=summary.cracked hint="" %}
+        {% include "partials/_stepper.html" with name="dirty" label="Dirty" value=summary.dirty hint="" %}
+        <button type="button" class="btn btn-primary w-100 btn-lg" hx-post="{% url 'egg_save' %}" hx-include="#egg-form" hx-target="#egg-summary" hx-swap="innerHTML">Save today's collection</button>
+      </div>
+    </form>
+  </div>
+  <div class="col-12 col-lg-6"><div id="egg-summary">{% include "partials/_egg_summary.html" with s=summary %}</div></div>
+</div>
+{% endblock %}

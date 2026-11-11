@@ -1,0 +1,8 @@
+{% extends "app_base.html" %}
+{% block title %}Mortality · {{ brand }}{% endblock %}
+{% block content %}
+<div class="mb-3"><h1 class="page-title">Health</h1><div class="text-muted">Mortality record</div></div>
+{% include "health/_tabs.html" with url_name="mortality" %}
+<div class="mb-3" style="max-width:520px">{% include "partials/_batch_select.html" %}</div>
+<div id="health-panel" style="max-width:760px">{% include "partials/_mortality_panel.html" %}</div>
+{% endblock %}

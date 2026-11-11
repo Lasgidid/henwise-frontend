@@ -1,0 +1,26 @@
+{% load humanize %}
+{% load l10n %}
+<div id="history-panel">
+  <div class="d-flex gap-2 mb-3 flex-wrap">
+    {% for r in h.ranges %}<button class="btn btn-sm {% if r.active %}btn-primary{% else %}btn-outline-primary{% endif %}" hx-get="{% url 'egg_history_panel' %}?range={{ r.key }}" hx-target="#history-panel" hx-swap="outerHTML">{{ r.label }}</button>{% endfor %}
+  </div>
+  <div class="row g-3 mb-3">
+    <div class="col-6 col-lg-3"><div class="card"><div class="card-body"><div class="small text-muted">Average</div><div class="fs-3 fw-bold">{{ h.avg }}%</div></div></div></div>
+    <div class="col-6 col-lg-3"><div class="card"><div class="card-body"><div class="small text-muted">Best day</div><div class="fs-3 fw-bold">{{ h.best.v }}%</div><div class="small text-muted">{{ h.best.label }}</div></div></div></div>
+    <div class="col-6 col-lg-3"><div class="card"><div class="card-body"><div class="small text-muted">Days on target</div><div class="fs-3 fw-bold">{{ h.on_target }} / {{ h.days }}</div></div></div></div>
+    <div class="col-6 col-lg-3"><div class="card"><div class="card-body"><div class="small text-muted">Eggs</div><div class="fs-3 fw-bold">{{ h.eggs|intcomma }}</div><div class="small text-muted">about {{ h.crates|intcomma }} crates sold</div></div></div></div>
+  </div>
+  <div class="card mb-3"><div class="card-body">
+    <div class="d-flex justify-content-between mb-2"><strong>Hen-day production</strong><span class="small text-muted">{{ h.range_label }}</span></div>
+    <div class="chart-wrap">
+      <div class="chart-y">{% for y in h.y_labels %}<span>{{ y }}</span>{% endfor %}</div>
+      <div class="chart-target" style="bottom:{{ h.target_pos|unlocalize }}%"></div>
+      {% for b in h.bars %}<div class="bar {% if b.dip %}dip{% elif b.below %}below{% endif %}" style="height:{{ b.h|unlocalize }}%" title="{{ b.label }}: {{ b.v }}%"></div>{% endfor %}
+    </div>
+    <div class="chart-x">{% for x in h.x_labels %}<span>{{ x }}</span>{% endfor %}</div>
+    <div class="small text-muted mt-2">Dashed line = 85% target. Amber bars are below target, red bars are sharp drops.</div>
+  </div></div>
+  <div class="card"><div class="card-body px-4 py-2">
+    {% for w in h.weeks %}<div class="row-item"><div class="flex-grow-1">{{ w.label }}</div><strong>{{ w.avg }}%</strong><span class="pill tone-{{ w.delta_tone }}">{{ w.delta_text }}</span></div>{% endfor %}
+  </div></div>
+</div>

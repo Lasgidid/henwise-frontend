@@ -1,0 +1,12 @@
+<a class="brand mb-1" href="{% url 'dashboard' %}"><i class="bi bi-egg-fill"></i>{{ brand }}</a>
+<div class="small text-muted mb-4">{{ farm_name }}</div>
+<nav class="flex-grow-1">
+  <a class="nav-item-link {% if active == 'dashboard' %}active{% endif %}" href="{% url 'dashboard' %}"><i class="bi bi-house-door"></i>Home</a>
+  <a class="nav-item-link {% if active == 'eggs' %}active{% endif %}" href="{% url 'eggs' %}"><i class="bi bi-egg"></i>Eggs</a>
+  <a class="nav-item-link {% if active == 'batches' %}active{% endif %}" href="{% url 'batches' %}"><i class="bi bi-collection"></i>Layer batches</a>
+  <a class="nav-item-link {% if active == 'feed' %}active{% endif %}" href="{% url 'feed' %}"><i class="bi bi-basket"></i>Feed</a>
+  <a class="nav-item-link {% if active == 'health' %}active{% endif %}" href="{% url 'vaccines' %}"><i class="bi bi-heart-pulse"></i>Health</a>
+  {% if is_admin %}<a class="nav-item-link {% if active == 'money' %}active{% endif %}" href="{% url 'money' %}"><i class="bi bi-cash-coin"></i>Money</a>{% endif %}
+</nav>
+<div class="small text-muted mb-2">Signed in as {{ role }}</div>
+<a class="btn btn-outline-primary btn-sm" href="{% url 'logout' %}"><i class="bi bi-box-arrow-right me-1"></i>Log out</a>

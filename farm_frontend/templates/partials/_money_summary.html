@@ -1,0 +1,13 @@
+{% load humanize %}
+<div id="money-summary">
+  <div class="card mb-3 {% if m.profit %}tone-success{% else %}tone-danger{% endif %}" style="border:0"><div class="card-body p-4">
+    <div class="small fw-semibold">Net profit · {{ m.month }}</div><div class="display-5 fw-bold">₦{{ m.net|intcomma }}</div>
+    <div class="small">Revenue ₦{{ m.revenue_total|intcomma }} − expenses ₦{{ m.expense_total|intcomma }}</div>
+  </div></div>
+  <div class="row g-3">
+    <div class="col-12 col-lg-6"><div class="card h-100"><div class="card-body px-4 py-3"><h6 class="fw-bold">Revenue</h6>
+      {% for r in m.revenue %}<div class="row-item"><div class="flex-grow-1"><div class="fw-semibold">{{ r.label }}</div><div class="small text-muted">{{ r.sub }}</div></div><strong>₦{{ r.amount|intcomma }}</strong></div>{% endfor %}</div></div></div>
+    <div class="col-12 col-lg-6"><div class="card h-100"><div class="card-body px-4 py-3"><h6 class="fw-bold">Expenses</h6>
+      {% for e in m.expenses %}<div class="row-item"><div class="flex-grow-1"><div class="fw-semibold">{{ e.label }}</div><div class="small text-muted">{{ e.share }}% of costs</div></div><strong>₦{{ e.amount|intcomma }}</strong></div>{% endfor %}</div></div></div>
+  </div>
+</div>

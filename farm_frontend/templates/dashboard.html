@@ -1,0 +1,25 @@
+{% extends "app_base.html" %}
+{% load l10n %}
+{% block title %}Home · {{ brand }}{% endblock %}
+{% block content %}
+<div class="mb-4"><h1 class="page-title">Good morning</h1><div class="text-muted">{{ farm_name }} · {{ today_label }}</div></div>
+<div class="row g-3 mb-4">
+  <div class="col-12 col-lg-5">
+    <div class="card hero-card h-100"><div class="card-body p-4">
+      <div class="small opacity-75">Today's hen-day production · Batch A</div>
+      <div class="hero-big my-2">{{ summary.pct }}%</div>
+      <div class="hero-bar mb-2"><span style="width:{{ summary.fill|unlocalize }}%"></span></div>
+      <div class="small">{{ summary.label }} · {{ summary.delta_text }}</div>
+      <div class="mt-3 d-flex gap-2"><a class="btn btn-light btn-sm" href="{% url 'eggs' %}">Record eggs</a><a class="btn btn-outline-light btn-sm" href="{% url 'egg_history' %}">See history</a></div>
+    </div></div>
+  </div>
+  <div class="col-12 col-lg-7">
+    <div class="card h-100"><div class="card-body p-4">
+      <h5 class="fw-bold mb-3"><i class="bi bi-lightning-charge me-1"></i>Do next</h5>
+      <div hx-get="{% url 'next_actions' %}" hx-trigger="every 60s" hx-swap="innerHTML">{% include "partials/_next_actions.html" %}</div>
+    </div></div>
+  </div>
+</div>
+<h5 class="fw-bold mb-3">Your layer batches</h5>
+{% include "partials/_batch_list.html" %}
+{% endblock %}

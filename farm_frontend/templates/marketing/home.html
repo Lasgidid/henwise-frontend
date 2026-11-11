@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}{{ brand }} · Smart layer farm management{% endblock %}
+{% block body %}
+<nav class="navbar bg-white border-bottom"><div class="container">
+  <a class="brand" href="{% url 'home' %}"><i class="bi bi-egg-fill"></i>{{ brand }}</a>
+  <div class="d-flex gap-2"><a class="btn btn-outline-primary btn-sm" href="{% url 'login' %}">Log in</a><a class="btn btn-primary btn-sm" href="#waitlist">Join waitlist</a></div>
+</div></nav>
+<header class="mk-hero"><div class="container">
+  <div class="row align-items-center g-4">
+    <div class="col-lg-7">
+      <span class="pill tone-success mb-3">For egg farmers</span>
+      <h1>Know what your layers need next.</h1>
+      <p class="lead text-muted">{{ brand }} tracks your hens from chick to retirement. It tells you when laying starts, how many eggs to expect, and what to do today.</p>
+      <a href="#waitlist" class="btn btn-primary btn-lg">Join the waitlist</a>
+      <a href="{% url 'dashboard' %}" class="btn btn-outline-primary btn-lg">See the demo</a>
+    </div>
+    <div class="col-lg-5"><div class="card hero-card"><div class="card-body p-4">
+      <div class="small opacity-75">Hen-day production today</div><div class="hero-big my-2">88.8%</div>
+      <div class="hero-bar mb-2"><span style="width:88.8%"></span></div><div class="small">On target · ▲ 0.8 pts vs yesterday</div>
+    </div></div></div>
+  </div>
+</div></header>
+<section class="py-5"><div class="container">
+  <h2 class="fw-bold mb-4">Everything a layer farm needs</h2>
+  <div class="row g-3">
+    <div class="col-md-6 col-lg-4"><div class="card h-100"><div class="card-body p-4"><div class="feature-ico mb-3"><i class="bi bi-hourglass-split"></i></div><h5 class="fw-bold">Point of lay countdown</h5><p class="text-muted mb-0">See how many days until each batch starts laying, and what to prepare first.</p></div></div></div>
+    <div class="col-md-6 col-lg-4"><div class="card h-100"><div class="card-body p-4"><div class="feature-ico mb-3"><i class="bi bi-egg"></i></div><h5 class="fw-bold">Daily eggs and hen-day ratio</h5><p class="text-muted mb-0">Enter good, cracked and dirty eggs. Get a green, amber or red flag at once.</p></div></div></div>
+    <div class="col-md-6 col-lg-4"><div class="card h-100"><div class="card-body p-4"><div class="feature-ico mb-3"><i class="bi bi-basket"></i></div><h5 class="fw-bold">Feed and stock</h5><p class="text-muted mb-0">Grams per bird each day, and a warning before a bag runs out.</p></div></div></div>
+    <div class="col-md-6 col-lg-4"><div class="card h-100"><div class="card-body p-4"><div class="feature-ico mb-3"><i class="bi bi-heart-pulse"></i></div><h5 class="fw-bold">Vaccines and mortality</h5><p class="text-muted mb-0">A calendar per batch, a withdrawal timer for egg sales, and a spike alert for deaths.</p></div></div></div>
+    <div class="col-md-6 col-lg-4"><div class="card h-100"><div class="card-body p-4"><div class="feature-ico mb-3"><i class="bi bi-lightbulb"></i></div><h5 class="fw-bold">A "Do next" list</h5><p class="text-muted mb-0">Not just data entry. The app tells you what to plan, including when to order replacement chicks.</p></div></div></div>
+    <div class="col-md-6 col-lg-4"><div class="card h-100"><div class="card-body p-4"><div class="feature-ico mb-3"><i class="bi bi-cash-coin"></i></div><h5 class="fw-bold">Profit and expenses</h5><p class="text-muted mb-0">Revenue, costs and net profit each month, visible to the owner only.</p></div></div></div>
+  </div>
+</div></section>
+<section id="waitlist" class="py-5 bg-white border-top"><div class="container" style="max-width:560px">
+  <h2 class="fw-bold">Get early access</h2><p class="text-muted">Leave your email and we'll tell you when {{ brand }} opens.</p>
+  <form hx-post="{% url 'waitlist' %}" hx-target="#waitlist-result" hx-swap="innerHTML" class="d-flex gap-2 mb-3">
+    <input type="email" name="email" class="form-control" placeholder="you@farm.com" required><button class="btn btn-primary">Join</button>
+  </form>
+  <div id="waitlist-result"></div>
+</div></section>
+<footer class="py-4 text-center small text-muted">© {{ brand }}</footer>
+{% endblock %}

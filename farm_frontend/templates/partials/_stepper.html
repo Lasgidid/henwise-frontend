@@ -1,0 +1,9 @@
+<div class="mb-3">
+  <label class="form-label fw-semibold mb-1" for="id_{{ name }}">{{ label }}</label>
+  <div class="stepper">
+    <button type="button" class="step-btn" data-step="-10" aria-label="minus 10">−</button>
+    <input type="number" min="0" inputmode="numeric" class="form-control" id="id_{{ name }}" name="{{ name }}" value="{{ value }}">
+    <button type="button" class="step-btn" data-step="10" aria-label="plus 10">+</button>
+  </div>
+  {% if hint %}<div class="form-text">{{ hint }}</div>{% endif %}
+</div>

@@ -1,0 +1,3 @@
+{% for f in today %}
+<div class="row-item"><div class="flex-grow-1"><div class="fw-semibold">{{ f.batch }}</div><div class="small text-muted">{{ f.detail }}</div>{% if f.note %}<div class="small text-success">{{ f.note }}</div>{% endif %}</div><span class="pill tone-{{ f.tone }}">{{ f.g }} g/bird</span></div>
+{% endfor %}

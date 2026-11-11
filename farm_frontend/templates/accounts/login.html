@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Log in · {{ brand }}{% endblock %}
+{% block body %}
+<div class="container py-5" style="max-width:460px">
+  <a class="brand justify-content-center mb-4" href="{% url 'home' %}"><i class="bi bi-egg-fill"></i>{{ brand }}</a>
+  <div class="card"><div class="card-body p-4">
+    <ul class="nav nav-pills nav-fill mb-4">
+      <li class="nav-item"><a class="nav-link {% if active_tab == 'worker' %}active{% endif %}" href="{% url 'login' %}">Worker</a></li>
+      <li class="nav-item"><a class="nav-link {% if active_tab == 'admin' %}active{% endif %}" href="{% url 'admin_login' %}">Admin</a></li>
+    </ul>
+    {% if active_tab == 'admin' %}
+    <form method="post" action="{% url 'admin_login' %}">{% csrf_token %}
+      <div class="mb-3"><label class="form-label fw-semibold">Admin email</label><input type="email" name="email" class="form-control" required></div>
+      <div class="mb-3"><label class="form-label fw-semibold">Password</label><input type="password" name="password" class="form-control" required></div>
+      <div class="mb-3"><label class="form-label fw-semibold">6-digit code</label><input name="code" inputmode="numeric" maxlength="6" class="form-control" required></div>
+      <button class="btn btn-primary w-100">Log in as admin</button>
+    </form>
+    {% else %}
+    <form method="post" action="{% url 'login' %}">{% csrf_token %}
+      <div class="mb-3"><label class="form-label fw-semibold">Phone or email</label><input name="username" class="form-control" required></div>
+      <div class="mb-3"><label class="form-label fw-semibold">Password</label><input type="password" name="password" class="form-control" required></div>
+      <button class="btn btn-primary w-100">Log in</button>
+    </form>
+    <div class="small text-muted mt-3">Workers can record eggs, feed, deaths and vaccines. Money is for admins.</div>
+    {% endif %}
+  </div></div>
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "app_base.html" %}
+{% block title %}Money · {{ brand }}{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+  <div><h1 class="page-title">Profit &amp; expenses</h1><div class="text-muted">Admin only</div></div>
+  <div class="d-flex gap-2">
+    <input type="month" name="month" class="form-control" value="2026-10" hx-get="{% url 'money_summary' %}" hx-target="#money-summary" hx-swap="outerHTML" hx-trigger="change">
+    <button class="btn btn-primary text-nowrap" data-bs-toggle="collapse" data-bs-target="#addEntry">Add entry</button>
+  </div>
+</div>
+<form id="addEntry" class="card collapse mb-4" hx-post="{% url 'money_add' %}" hx-target="#money-summary" hx-swap="outerHTML" hx-on::after-request="if(event.detail.successful)this.reset()">
+  <div class="card-body p-4 row g-3">
+    <div class="col-md-3"><label class="form-label fw-semibold">Type</label><select name="kind" class="form-select"><option value="revenue">Revenue</option><option value="expense">Expense</option></select></div>
+    <div class="col-md-3"><label class="form-label fw-semibold">Category</label><input name="category" class="form-control" placeholder="Egg sales, Feed…" required></div>
+    <div class="col-md-3"><label class="form-label fw-semibold">Amount (₦)</label><input type="number" min="0" name="amount" class="form-control" required></div>
+    <div class="col-md-3"><label class="form-label fw-semibold">Date</label><input type="date" name="date" class="form-control" required></div>
+    <div class="col-12"><input name="note" class="form-control" placeholder="Note (optional)"></div>
+    <div class="col-12"><button class="btn btn-primary">Save entry</button></div>
+  </div>
+</form>
+{% include "partials/_money_summary.html" %}
+{% endblock %}

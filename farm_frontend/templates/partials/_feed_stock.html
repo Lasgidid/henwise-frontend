@@ -1,0 +1,6 @@
+{% load l10n %}
+{% for s in stock %}
+<div class="row-item"><div class="flex-grow-1"><div class="fw-semibold">{{ s.name }} · {{ s.bags }} bags</div><div class="small text-muted">Expires {{ s.expires }} · about {{ s.days_left }} days left</div>
+<div class="meter mt-2"><span class="m-{{ s.tone }}" style="width:{{ s.pct|unlocalize }}%"></span></div></div>{% if s.flag %}<span class="pill tone-{{ s.tone }}">{{ s.flag }}</span>{% endif %}</div>
+{% endfor %}
+<div id="feed-stock-end"></div>

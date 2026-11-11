@@ -1,0 +1,9 @@
+{% extends "app_base.html" %}
+{% block title %}Production history · {{ brand }}{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+  <div><h1 class="page-title">Production history</h1><div class="text-muted">Batch A · target 85% hen-day</div></div>
+  <a class="btn btn-outline-primary" href="{% url 'eggs' %}"><i class="bi bi-plus-lg me-1"></i>Record eggs</a>
+</div>
+{% include "partials/_history_panel.html" %}
+{% endblock %}
