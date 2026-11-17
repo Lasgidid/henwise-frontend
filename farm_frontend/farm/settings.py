@@ -5,14 +5,19 @@ with the real ones. Keep the template DIRS, STATICFILES_DIRS and the
 `core.context_processors.site` context processor (or move its values elsewhere).
 """
 from pathlib import Path
+import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = "dev-only-change-me"
+ADMIN_LOGIN_CODE = os.environ.get("HENWISE_ADMIN_LOGIN_CODE", "")
 DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
     "django.contrib.humanize",  # intcomma filter used for money
     "django.contrib.staticfiles",
     "core",
@@ -22,11 +27,11 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
 ]
 
-# Demo only: keeps the role in a signed cookie so no database is needed.
-SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
+LOGIN_URL = "/login/"
 
 ROOT_URLCONF = "farm.urls"
 

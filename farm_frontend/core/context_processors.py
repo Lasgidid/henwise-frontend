@@ -1,15 +1,14 @@
 def site(request):
     """Values every template can use.
 
-    TODO(backend): take `role` from request.user (e.g. a group or a profile
-    field) and `farm_name` from the user's farm. `today_label` should be the
-    real date.
+    Role is derived from Django's authenticated user.
     """
-    role = request.session.get("role", "admin")
+    from django.utils import timezone
+    role = "admin" if request.user.is_authenticated and request.user.is_staff else "worker"
     return {
         "brand": "Henwise",  # working product name, change in one place
         "farm_name": "Green Acre Farm",
-        "today_label": "Oct 27, 2026",
+        "today_label": timezone.localdate().strftime("%b %d, %Y"),
         "role": role,
         "is_admin": role == "admin",
     }

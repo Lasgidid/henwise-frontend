@@ -8,6 +8,7 @@
       <li class="nav-item"><a class="nav-link {% if active_tab == 'worker' %}active{% endif %}" href="{% url 'login' %}">Worker</a></li>
       <li class="nav-item"><a class="nav-link {% if active_tab == 'admin' %}active{% endif %}" href="{% url 'admin_login' %}">Admin</a></li>
     </ul>
+    {% if error %}<div class="alert alert-danger" role="alert">{{ error }}</div>{% endif %}
     {% if active_tab == 'admin' %}
     <form method="post" action="{% url 'admin_login' %}">{% csrf_token %}
       <div class="mb-3"><label class="form-label fw-semibold">Admin email</label><input type="email" name="email" class="form-control" required></div>

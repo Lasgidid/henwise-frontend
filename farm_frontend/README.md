@@ -4,10 +4,16 @@ Frontend handoff for the backend developer. Every page renders today with **samp
 
 ## Run it
 ```
+python -m venv .venv
+.venv\\Scripts\\Activate.ps1
 pip install -r requirements.txt
+python manage.py migrate
+python manage.py createsuperuser
 python manage.py runserver
 ```
-Open http://127.0.0.1:8000/ . The demo "login" only stores a role (worker/admin) in a signed cookie. Money pages are 403 for workers.
+Open http://127.0.0.1:8000/ . Sign in with a Django account. Staff accounts need a six-digit admin code configured as `HENWISE_ADMIN_LOGIN_CODE` in the environment; money pages require staff access. Add a batch from the Batches page before recording farm activity.
+
+The initial database migration is in `core/migrations/`. Operational data is stored in SQLite for local development. Configure a production database and a strong `SECRET_KEY` before deployment.
 
 ## How it is built
 - Bootstrap 5.3.3, Bootstrap Icons and HTMX 2.0.4 load from CDN (no SRI hashes; add them or vendor the files for production).
